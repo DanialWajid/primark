@@ -181,7 +181,7 @@ router.post("/admin/user-forgot-password", async (req, res) => {
 
     await sendResetPasswordEmail(
       user.email,
-      `https://primark-production.up.railway.app/reset-password/${resetToken}`
+      `https://primark-production.up.railway.app/user/reset-password/${resetToken}`
     );
 
     res.status(200).redirect("/admin/reset-sent");
