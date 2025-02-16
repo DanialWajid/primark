@@ -1,0 +1,12 @@
+ Project Name: Real-time Chat Application
+
+ Summary:
+This project was about building a real-time chat application using Node.js and Socket.io. The aim was to implement a platform where users could communicate instantly with each other.
+ Description:
+In this project, I built a chat application where multiple users could join a chat room and exchange messages in real-time. The project leveraged WebSockets through Socket.io to maintain an open connection between clients and the server.
+
+Key features included:
+- Real-time communication with no noticeable delay.
+- User notifications when new users join or leave the chat.
+- Message broadcasting to all connected users.
+- A simple yet intuitive user interface built with HTML, CSS, and Bootstrap.

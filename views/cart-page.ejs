@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shopping Cart</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <style>
+      .cart-heading {
+        font-size: 28px;
+        font-weight: bold;
+        color: #007bff;
+        margin-bottom: 30px;
+        border-bottom: 2px solid #007bff;
+        padding-bottom: 10px;
+      }
+
+      .cart-item {
+        border-bottom: 1px solid #ddd;
+        padding: 15px 0;
+      }
+
+      .cart-item img {
+        max-width: 100px;
+      }
+
+      .cart-item-details {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .cart-item-details span {
+        margin-left: 15px;
+      }
+
+      .total-price {
+        font-size: 20px;
+        font-weight: bold;
+        margin-top: 20px;
+      }
+
+      .checkout-btn {
+        margin-top: 30px;
+        width: 100%;
+        padding: 10px;
+        margin: 10px;
+        background-color: #007bff;
+        color: white;
+      }
+
+      .button-column {
+        display: flex;
+        flex-direction: column; /* Stacks buttons vertically */
+        gap: 10px; /* Adds space between buttons */
+      }
+
+      .view-details-btn {
+        background-color: #28a745;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container mt-5">
+      <div class="cart-heading">
+        <i class="fas fa-shopping-cart"></i> Your Shopping Cart
+      </div>
+
+      <div id="cart-items">
+        <!-- Cart items will be dynamically added here using JavaScript -->
+      </div>
+
+      <div class="total-price" id="total-price">
+        <!-- Total price will be dynamically added here -->
+      </div>
+
+      <a href="/user/checkout" class="btn checkout-btn">
+        Proceed to Checkout
+      </a>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+      const userEmail = "<%= userEmail %>";
+
+      if (userEmail) {
+        const cart = JSON.parse(localStorage.getItem(userEmail)) || [];
+        const cartItemsContainer = document.getElementById("cart-items");
+
+        if (cart.length === 0) {
+          cartItemsContainer.innerHTML = "<p>Your cart is empty.</p>";
+        } else {
+          let totalPrice = 0;
+
+          cart.forEach((item) => {
+            totalPrice += item.price * item.quantity;
+
+            const cartItemDiv = document.createElement("div");
+            cartItemDiv.classList.add("cart-item");
+
+            cartItemDiv.innerHTML = `
+              <div class="cart-item-details">
+                <img src="${item.productImage}" alt="${item.productId}" class="img-fluid">
+                <div>
+                  <h5>${item.name}</h5>
+                  <p>Size: ${item.size} | Color: ${item.color}</p>
+                  <p>Price: £${item.price}</p>
+                  <p>Quantity: ${item.quantity}</p>
+                </div>
+                <div class="button-column">
+                  <button class="btn btn-danger remove-item" data-product-id="${item.productId}">
+                    Remove
+                  </button>
+                  <a href="/products/${item.productId}" class="btn view-details-btn">View Details</a>
+                </div>
+              </div>
+            `;
+
+            cartItemsContainer.appendChild(cartItemDiv);
+          });
+
+          document.getElementById("total-price").innerHTML = `
+            Total Price: £${totalPrice.toFixed(2)}
+          `;
+        }
+
+        const removeButtons = document.querySelectorAll(".remove-item");
+        removeButtons.forEach((button) => {
+          button.addEventListener("click", function () {
+            const productId = this.getAttribute("data-product-id");
+
+            const updatedCart = cart.filter(
+              (item) => item.productId !== productId
+            );
+            localStorage.setItem(userEmail, JSON.stringify(updatedCart));
+
+            location.reload();
+          });
+        });
+      } else {
+        alert("Please log in to view your cart.");
+      }
+    </script>
+  </body>
+</html>

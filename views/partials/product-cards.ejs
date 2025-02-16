@@ -1,0 +1,16 @@
+<div class="img-cards d-flex justify-content-center position-absolute px-5">
+  <div class="row w-100">
+    <% dynamicCards.forEach(function(card) { %>
+    <div class="col-12 col-md-2 text-center">
+      <a href="<%= card.link %>" class="text-decoration-none text-dark">
+        <img
+          src="<%= card.image %>"
+          alt="<%= card.alt %>"
+          class="py-3 img-fluid"
+        />
+        <p class="fw-bold"><%= card.text %></p>
+      </a>
+    </div>
+    <% }) %>
+  </div>
+</div>

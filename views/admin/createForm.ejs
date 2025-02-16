@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-MRk1OhxM8QGgX5VBfBgRLlgzDVRyodFAPbC0ebzu6WzUfu4Ddo7s5YI31UW1t8N"
+      crossorigin="anonymous"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="/js/createForm.js"></script>
+    <title>Product Details</title>
+    <style>
+      .error-message {
+        display: none;
+        color: red;
+        font-size: 0.9rem;
+      }
+      .container {
+        max-width: 600px;
+        margin: 20px auto;
+        font-family: Arial, sans-serif;
+      }
+      .card {
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        padding: 20px;
+        background-color: #f9f9f9;
+      }
+      .btn {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .btn:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container mt-5">
+      <div class="card shadow">
+        <div class="card-header">
+          <h2 class="text-center">Product Details</h2>
+        </div>
+        <div class="card-body">
+          <form
+            id="productForm"
+            method="POST"
+            action="/product-details"
+            enctype="multipart/form-data"
+          >
+            <!-- Product Name -->
+            <div class="form-group">
+              <label for="name">Product Name</label>
+              <input
+                type="text"
+                class="form-control query"
+                id="name"
+                name="name"
+                placeholder="Enter Product Name"
+              />
+              <div class="error-message">Product Name is required</div>
+            </div>
+
+            <!-- Category Type Dropdown -->
+            <div class="form-group">
+              <label for="categoryType">Category Type</label>
+              <select
+                class="form-control query"
+                id="categoryType"
+                name="categoryType"
+              >
+                <option value="" disabled selected>Select Category Type</option>
+                <option value="Men">Men</option>
+                <option value="Women">Women</option>
+                <option value="Kids">Kids</option>
+                <option value="Click & Collect">Click & Collect</option>
+                <option value="Home">Home</option>
+                <option value="Baby">Baby</option>
+              </select>
+              <div class="error-message">Category Type is required</div>
+            </div>
+
+            <!-- Item Type Dropdown (dynamically populated) -->
+            <div class="form-group">
+              <label for="itemType">Item Type</label>
+              <select class="form-control query" id="itemType" name="itemType">
+                <option value="" disabled selected>Select Item Type</option>
+                <!-- Dynamically populate based on category -->
+              </select>
+              <div class="error-message">Item Type is required</div>
+            </div>
+
+            <!-- Price -->
+            <div class="form-group">
+              <label for="price">Price (£)</label>
+              <input
+                type="number"
+                class="form-control query"
+                id="price"
+                name="price"
+                placeholder="Enter Price"
+              />
+              <div class="error-message">Price is required</div>
+            </div>
+
+            <!-- Sizes Available (Row-wise alignment) -->
+            <div class="form-group">
+              <label for="sizesAvailable">Sizes Available</label>
+              <div class="row">
+                <div class="col-md-2 col-sm-4">
+                  <label
+                    ><input type="checkbox" name="sizesAvailable" value="XXS" />
+                    XXS</label
+                  >
+                </div>
+                <div class="col-md-2 col-sm-4">
+                  <label
+                    ><input type="checkbox" name="sizesAvailable" value="XS" />
+                    XS</label
+                  >
+                </div>
+                <div class="col-md-2 col-sm-4">
+                  <label
+                    ><input type="checkbox" name="sizesAvailable" value="S" />
+                    S</label
+                  >
+                </div>
+                <div class="col-md-2 col-sm-4">
+                  <label
+                    ><input type="checkbox" name="sizesAvailable" value="M" />
+                    M</label
+                  >
+                </div>
+                <div class="col-md-2 col-sm-4">
+                  <label
+                    ><input type="checkbox" name="sizesAvailable" value="L" />
+                    L</label
+                  >
+                </div>
+                <div class="col-md-2 col-sm-4">
+                  <label
+                    ><input type="checkbox" name="sizesAvailable" value="XL" />
+                    XL</label
+                  >
+                </div>
+                <div class="col-md-2 col-sm-4">
+                  <label
+                    ><input type="checkbox" name="sizesAvailable" value="XXL" />
+                    XXL</label
+                  >
+                </div>
+              </div>
+              <div class="error-message">At least one size is required</div>
+            </div>
+
+            <!-- Colors (Row-wise alignment) -->
+            <div class="form-group">
+              <label for="colors">Colors</label>
+              <div class="row">
+                <div class="col-md-2 col-sm-4">
+                  <label
+                    ><input type="checkbox" name="colors" value="Red" />
+                    Red</label
+                  >
+                </div>
+                <div class="col-md-2 col-sm-4">
+                  <label
+                    ><input type="checkbox" name="colors" value="Blue" />
+                    Blue</label
+                  >
+                </div>
+                <div class="col-md-2 col-sm-4">
+                  <label
+                    ><input type="checkbox" name="colors" value="Black" />
+                    Black</label
+                  >
+                </div>
+                <div class="col-md-2 col-sm-4">
+                  <label
+                    ><input type="checkbox" name="colors" value="White" />
+                    White</label
+                  >
+                </div>
+              </div>
+              <div class="error-message">At least one color is required</div>
+            </div>
+
+            <!-- Product Image -->
+            <div class="form-group">
+              <label for="productImage">Product Image</label>
+              <input
+                type="file"
+                class="form-control query"
+                id="productImage"
+                name="productImage"
+                accept="image/*"
+              />
+              <div class="error-message">Product Image is required</div>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary btn-block">
+              Submit
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document
+        .getElementById("categoryType")
+        .addEventListener("change", function () {
+          const categoryType = this.value;
+          const itemTypeDropdown = document.getElementById("itemType");
+
+          fetch(`/get-item-types?type=${categoryType}`)
+            .then((response) => response.json())
+            .then((itemTypes) => {
+              itemTypeDropdown.innerHTML =
+                '<option value="" disabled selected>Select Item Type</option>';
+
+              itemTypes.forEach(function (itemType) {
+                const option = document.createElement("option");
+                option.value = itemType;
+                option.textContent = itemType;
+                itemTypeDropdown.appendChild(option);
+              });
+            })
+            .catch((error) => {
+              console.error("Error fetching item types:", error);
+            });
+        });
+    </script>
+  </body>
+</html>

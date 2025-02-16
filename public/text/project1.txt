@@ -1,0 +1,12 @@
+ Project Name: Portfolio Web Page
+
+ Summary:
+This project was focused on creating a personal portfolio website, which displayed various projects I have worked on during the semester. The goal was to design an aesthetically pleasing and responsive site to showcase my work.
+
+Description:
+The portfolio web page was developed using HTML, CSS, and a bit of JavaScript. I drew inspiration from various online portfolios to craft a user-friendly experience. This project also introduced me to the Bootstrap framework, which was used for creating responsive layouts.
+
+Key features included:
+- Dynamic content loading: Descriptions for projects are stored in separate text files and are loaded dynamically when the user clicks the "Show Description" button.
+- A categorized structure that groups projects by semester.
+- Use of Bootstrap grid system for a mobile-friendly interface.

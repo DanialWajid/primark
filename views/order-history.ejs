@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Delivery History</title>
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        color: #333;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 50px auto;
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        color: #007bff;
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      table th,
+      table td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+
+      table th {
+        background-color: #007bff;
+        color: #fff;
+      }
+
+      .text-center {
+        text-align: center;
+      }
+
+      .btn-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .collapse-content {
+        background-color: #f8f9fa;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin-top: 10px;
+      }
+
+      table {
+        overflow-x: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Your Delivery History</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Order Date</th>
+            <th>Order ID</th>
+            <th>Payment Mode</th>
+            <th>Status</th>
+            <th>Total Amount</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if (orders.length > 0) { %> <% orders.forEach(order => { %>
+          <tr>
+            <td><%= new Date(order.orderDate).toLocaleDateString() %></td>
+            <td><%= order._id %></td>
+            <td><%= order.paymentMode %></td>
+            <td><%= order.status %></td>
+            <td>$<%= order.totalAmount.toFixed(2) %></td>
+            <td>
+              <div class="btn-group">
+                <button
+                  class="btn btn-primary btn-sm"
+                  data-toggle="collapse"
+                  data-target="#details-<%= order._id %>"
+                >
+                  Details
+                </button>
+                <button
+                  class="btn btn-warning btn-sm"
+                  onclick="editOrder('<%= order._id %>')"
+                >
+                  Edit
+                </button>
+                <button
+                  class="btn btn-danger btn-sm"
+                  onclick="cancelOrder('<%= order._id %>')"
+                >
+                  Cancel
+                </button>
+              </div>
+            </td>
+          </tr>
+          <tr id="details-<%= order._id %>" class="collapse">
+            <td colspan="6">
+              <div class="collapse-content">
+                <h5>Order Details</h5>
+                <p><strong>Customer Name:</strong> <%= order.customerName %></p>
+                <p><strong>Email:</strong> <%= order.email %></p>
+                <p><strong>Phone:</strong> <%= order.phone %></p>
+                <p><strong>Address:</strong> <%= order.address %></p>
+
+                <h6>Products:</h6>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Product ID</th>
+                      <th>Name</th>
+                      <th>Size</th>
+                      <th>Color</th>
+                      <th>Quantity</th>
+                      <th>Price</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% order.products.forEach(product => { %>
+                    <tr>
+                      <td><%= product.productId %></td>
+                      <td><%= product.productName %></td>
+                      <td><%= product.size || 'N/A' %></td>
+                      <td><%= product.color || 'N/A' %></td>
+                      <td><%= product.quantity %></td>
+                      <td>$<%= product.price.toFixed(2) %></td>
+                    </tr>
+                    <% }) %>
+                  </tbody>
+                </table>
+              </div>
+            </td>
+          </tr>
+          <% }); %> <% } else { %>
+          <tr>
+            <td colspan="6" class="text-center">No orders found.</td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+      function editOrder(orderId) {
+        alert("Edit order functionality for Order ID: " + orderId);
+        // Add your logic to handle editing an order here
+      }
+
+      function cancelOrder(orderId) {
+        const confirmation = confirm(
+          "Are you sure you want to cancel this order?"
+        );
+        if (confirmation) {
+          alert("Order ID: " + orderId + " has been cancelled.");
+          // Add your logic to handle order cancellation here
+        }
+      }
+    </script>
+  </body>
+</html>

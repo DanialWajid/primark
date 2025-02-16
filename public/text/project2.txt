@@ -1,0 +1,13 @@
+ Project Name: Online Bookstore
+
+ Summary:
+The Online Bookstore project was designed as a web application that allows users to browse, search, and purchase books online. It focused on implementing CRUD operations using PHP and MySQL.
+
+ Description:
+This project was an introduction to full-stack web development. The application allowed users to create an account, search for books, add items to a cart, and purchase them. The back-end was developed in PHP, with MySQL handling the database for book information and user accounts.
+
+Key features included:
+- User authentication (login and registration).
+- Cart functionality where users could add and remove books.
+- Dynamic price calculation and order summaries.
+- Integration of AJAX for seamless cart updates without page reloads.

@@ -1,0 +1,23 @@
+.bg-image {
+  width: 100%;
+  height: 970px;
+  background-image: url(/images/SS24_emailsignup_7_3.avif);
+  background-size: contain;
+  background-position: center;
+}
+.w-60 {
+  width: 60%;
+}
+.w-40 {
+  width: 40%;
+}
+.bg-image-1 {
+  width: 100%;
+  background-image: url(bg.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.custom-bg {
+  background-color: rgb(129, 180, 198, 0.3);
+}

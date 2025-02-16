@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= product.name %> - Details</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <style>
+      .product-image-container {
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .product-image {
+        transition: transform 0.3s ease;
+        max-width: 100%;
+        object-fit: cover;
+      }
+
+      .product-image-container:hover .product-image {
+        transform: scale(1.5);
+      }
+
+      .color-button {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 2px solid #ccc;
+        margin-right: 10px;
+      }
+
+      #add-to-cart-btn {
+        display: block;
+        width: 100%;
+        margin-top: 20px;
+        padding: 10px;
+        margin-bottom: 40px;
+      }
+
+      .cart-heading {
+        font-size: 28px;
+        font-weight: bold;
+        color: #007bff;
+        margin-bottom: 30px;
+        border-bottom: 2px solid #007bff;
+        padding-bottom: 10px;
+      }
+
+      .navbar {
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="ml-auto">
+        <a href="/user/my-cart" class="btn btn-primary">
+          <i class="fas fa-shopping-cart"></i> My Cart
+        </a>
+        <a href="/user/order-history" class="btn btn-primary">
+          <i class="fas fa-history"></i> My Orders
+        </a>
+      </div>
+    </nav>
+
+    <div class="container mt-5">
+      <div class="cart-heading">
+        <i class="fas fa-shopping-cart"></i> Product Details
+      </div>
+
+      <form action="/add-to-cart" method="POST">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="product-image-container">
+              <img
+                src="<%= product.productImage %>"
+                alt="<%= product.name %>"
+                class="product-image img-fluid"
+              />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <h2><%= product.name %></h2>
+            <p class="text-muted">Price: £<%= product.price %></p>
+            <p><%= product.description %></p>
+
+            <% if (product.sizesAvailable && product.sizesAvailable.length > 0)
+            { %>
+            <h4>Select Size:</h4>
+            <div class="btn-group" role="group" aria-label="Size options">
+              <% product.sizesAvailable.forEach(function(size) { %>
+              <button
+                type="button"
+                class="btn btn-outline-primary size-button"
+                data-size="<%= size %>"
+                value="<%= size %>"
+              >
+                <%= size %>
+              </button>
+              <% }); %>
+            </div>
+            <% } else { %>
+            <p>No sizes available.</p>
+            <% } %> <% if (product.colors && product.colors.length > 0) { %>
+            <h4>Select Color:</h4>
+            <div class="btn-group" role="group" aria-label="Color options">
+              <% product.colors.forEach(function(color) { %>
+              <button
+                type="button"
+                class="btn btn-outline-secondary color-button"
+                style="background-color: <%= color %>"
+                data-color="<%= color %>"
+                value="<%= color %>"
+              ></button>
+              <% }); %>
+            </div>
+            <% } else { %>
+            <p>No colors available.</p>
+            <% } %>
+
+            <div class="mt-3">
+              <label for="quantity">Quantity:</label>
+              <input
+                type="number"
+                id="quantity"
+                name="quantity"
+                value="1"
+                min="1"
+                max="99"
+                class="form-control"
+              />
+            </div>
+
+            <input type="hidden" name="productId" value="<%= product._id %>" />
+            <input type="hidden" name="price" value="<%= product.price %>" />
+
+            <button type="submit" class="btn btn-success" id="add-to-cart-btn">
+              <i class="fas fa-shopping-cart"></i> Add to Cart
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+      $(".size-button").on("click", function () {
+        $(".size-button").removeClass("active");
+        $(this).addClass("active");
+      });
+
+      $(".color-button").on("click", function () {
+        $(".color-button").removeClass("active");
+        $(this).addClass("active");
+      });
+
+      $("#add-to-cart-btn").on("click", function (e) {
+        e.preventDefault();
+
+        const quantity = parseInt($("#quantity").val());
+        const selectedSize = $(".size-button.active").data("size");
+        const selectedColor = $(".color-button.active").data("color");
+
+        if (!selectedSize || !selectedColor) {
+          alert("Please select both a size and a color.");
+          return;
+        }
+
+        // Collect product data
+        const productDetails = {
+          productId: "<%= product._id %>",
+          name: "<%= product.name %>",
+          size: selectedSize,
+          color: selectedColor,
+          price: <%= product.price %>,
+          quantity: quantity,
+          productImage: "<%= product.productImage %>"
+        };
+
+        const userEmail = "<%= userEmail %>";
+
+        if (userEmail) {
+          let cart = JSON.parse(localStorage.getItem(userEmail)) || [];
+
+          const existingItem = cart.find(
+            item =>
+              item.productId === productDetails.productId &&
+              item.size === productDetails.size &&
+              item.color === productDetails.color
+          );
+
+          if (existingItem) {
+            existingItem.quantity += quantity;
+          } else {
+            cart.push(productDetails);
+          }
+
+          localStorage.setItem(userEmail, JSON.stringify(cart));
+
+          alert('Product added to cart!');
+        } else {
+          alert("Please log in to add items to your cart.");
+        }
+      });
+    </script>
+  </body>
+</html>

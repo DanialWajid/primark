@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Order Form</title>
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background-color: #f8f9fa;
+        color: #333;
+        font-family: Arial, sans-serif;
+      }
+
+      .container {
+        max-width: 600px;
+        margin: 50px auto;
+        background-color: #ffffff;
+        border-radius: 10px;
+        padding: 30px;
+        box-shadow: 0 0 15px rgba(0, 123, 255, 0.1);
+      }
+
+      h1 {
+        color: #007bff;
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .form-group label {
+        color: #007bff;
+      }
+
+      .form-control {
+        background-color: #ffffff;
+        border: 1px solid #007bff;
+        color: #333;
+      }
+
+      .form-control:focus {
+        box-shadow: 0 0 10px #007bff;
+        border-color: #007bff;
+      }
+
+      button {
+        background-color: #007bff;
+        border: none;
+        color: white;
+        font-weight: bold;
+        padding: 10px 20px;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+        width: 100%;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+
+      textarea.form-control {
+        resize: none;
+      }
+
+      .form-check-label {
+        color: #007bff;
+      }
+
+      .credit-card-details {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Customer Order Form</h1>
+      <form id="checkout-form" action="/user/checkout" method="POST">
+        <!-- Customer Name -->
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            class="form-control"
+            required
+            placeholder="Enter your full name"
+          />
+        </div>
+
+        <!-- Address -->
+        <div class="form-group">
+          <label for="address">Address</label>
+          <textarea
+            id="address"
+            name="address"
+            rows="3"
+            class="form-control"
+            required
+            placeholder="Enter your address"
+          ></textarea>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            class="form-control"
+            required
+            placeholder="Enter your phone number"
+          />
+        </div>
+
+        <!-- Email Address with Default Value -->
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            class="form-control"
+            required
+            placeholder="Enter your email address"
+            value="<%= userEmail %>"
+          />
+        </div>
+
+        <!-- Payment Mode -->
+        <div class="form-group">
+          <label for="paymentMode">Payment Mode</label>
+          <select
+            id="paymentMode"
+            name="paymentMode"
+            class="form-control"
+            required
+          >
+            <option value="cashOnDelivery">Cash on Delivery</option>
+            <option value="cardPayment">Card Payment</option>
+          </select>
+        </div>
+
+        <!-- Credit Card Details (Hidden by Default) -->
+        <div id="credit-card-details" class="credit-card-details">
+          <div class="form-group">
+            <label for="cardHolderName">Card Holder Name</label>
+            <input
+              type="text"
+              id="cardHolderName"
+              name="cardHolderName"
+              class="form-control"
+              placeholder="Enter cardholder name"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="cardNumber">Card Number</label>
+            <input
+              type="text"
+              id="cardNumber"
+              name="cardNumber"
+              class="form-control"
+              placeholder="Enter your card number"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="expiryDate">Expiration Date</label>
+            <input
+              type="text"
+              id="expiryDate"
+              name="expiryDate"
+              class="form-control"
+              placeholder="MM/YY"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="lastFourDigits">Last 4 Digits of Card</label>
+            <input
+              type="text"
+              id="lastFourDigits"
+              name="lastFourDigits"
+              class="form-control"
+              placeholder="Enter last 4 digits of your card"
+            />
+          </div>
+        </div>
+
+        <!-- Hidden Cart Data Input -->
+        <div class="form-group" style="display: none">
+          <input type="hidden" id="cart-data" name="cartData" />
+        </div>
+
+        <!-- Submit Button -->
+        <div class="form-group">
+          <button type="submit">Submit Order</button>
+        </div>
+      </form>
+    </div>
+
+    <script>
+      const userEmail = "<%= userEmail %>";
+      const cart = JSON.parse(localStorage.getItem(userEmail)) || [];
+
+      document
+        .getElementById("paymentMode")
+        .addEventListener("change", function () {
+          const paymentMode = this.value;
+          const creditCardDetails = document.getElementById(
+            "credit-card-details"
+          );
+
+          if (paymentMode === "cardPayment") {
+            creditCardDetails.style.display = "block";
+          } else {
+            creditCardDetails.style.display = "none";
+          }
+        });
+
+      document
+        .getElementById("checkout-form")
+        .addEventListener("submit", function (e) {
+          document.getElementById("cart-data").value = JSON.stringify(cart);
+
+          localStorage.removeItem(userEmail);
+        });
+    </script>
+  </body>
+</html>

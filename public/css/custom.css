@@ -1,0 +1,286 @@
+.bg-top {
+  background-color: rgba(201, 255, 3, 1);
+}
+.px-6 {
+  padding-left: 5%;
+  padding-right: 5%;
+}
+.px-7 {
+  padding-left: 15%;
+  padding-right: 5%;
+}
+.img-small {
+  width: 20vw;
+}
+.img-pfp {
+  height: 45px;
+  width: 45px;
+}
+
+.me-10 {
+  margin-right: 25%;
+}
+.px-18 {
+  padding-left: 14%;
+  padding-right: 14%;
+}
+.img-sm {
+  width: 15%;
+}
+.img-xsm {
+  width: 7%;
+  height: 7%;
+}
+.w-40 {
+  width: 400px;
+}
+.h-10 {
+  height: 25px;
+}
+
+.bg-image {
+  width: 100%;
+  height: 550px;
+  background-image: url("/images/WK52- Rita Landing page banner - 3 copy.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.img-cards {
+  width: 100%;
+  top: 40vw;
+}
+.gap-15 {
+  gap: 15vw;
+}
+@media (min-width: 1397px) {
+  .img-cards {
+    top: 25vw;
+    transform: none;
+  }
+}
+.start-20 {
+  left: 27%;
+}
+.top-60 {
+  top: 25vh;
+}
+.gap-7 {
+  gap: 5rem;
+}
+.gap-55 {
+  gap: 7.36rem;
+}
+.gap-9 {
+  gap: 10rem;
+}
+.mt-10 {
+  margin-top: 10%;
+}
+.border-mute {
+  border: 1px solid rgb(190, 186, 186);
+}
+.fs-10 {
+  font-size: 80%;
+}
+.bg-blue {
+  background-color: #00afdb;
+}
+.mb-6 {
+  margin-bottom: 2rem;
+}
+
+.justify-content-xL-between {
+  justify-content: space-between !important;
+}
+.ms-7 {
+  margin-left: 10%;
+}
+.w-15 {
+  width: 15%;
+}
+.text-wh {
+  color: white;
+}
+.display-flex {
+  display: flex;
+}
+.h-30 {
+  height: 121vh;
+}
+.h-105 {
+  height: 60vw;
+}
+.d-small {
+  display: none !important;
+}
+.sticky-top {
+  position: static;
+  top: 0;
+}
+.d-large-none {
+  display: none;
+}
+@media (max-width: 1000px) {
+  .position-bm {
+    bottom: 0 !important;
+    width: 100%;
+  }
+  .w-15 {
+    width: 80%;
+    height: 6%;
+    margin-left: 4%;
+    margin-right: 2%;
+  }
+  .img-sm {
+    width: 5%;
+  }
+  .img-cards .col-md-2 {
+    width: 33.3333%;
+  }
+  .img-cards {
+    top: 10%;
+  }
+  .text-light {
+    color: black;
+  }
+  .display-none {
+    display: none;
+  }
+  .display-flex {
+    display: none;
+  }
+
+  .text-wh {
+    color: black;
+    top: 5%;
+    left: 34vw;
+  }
+  .h-105 {
+    height: 100vw;
+  }
+  .d-large-none {
+    display: inline-block;
+  }
+  .gap-15 {
+    gap: 45vw;
+  }
+}
+
+@media (max-width: 768px) {
+  .img-cards .col-12.col-md-4 {
+    width: 100%;
+  }
+}
+@media (max-width: 700px) {
+  .display-none-sm {
+    display: none;
+  }
+  .flex-small-column {
+    flex-direction: column;
+    gap: 0;
+  }
+  .gap-5 {
+    gap: 0 !important;
+  }
+  .h-30 {
+    height: 37vh;
+  }
+  .w-15 {
+    width: 85%;
+    height: 13%;
+    margin-left: -1%;
+    margin-right: 2%;
+  }
+  .mb-6 {
+    margin-bottom: 0;
+  }
+
+  .b-top {
+    border-top: 0.1px solid rgb(216, 207, 207);
+  }
+  .px-1 {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+  }
+  .h-105 {
+    height: 194vw;
+  }
+  .sticky-top {
+    position: sticky;
+    top: 0;
+  }
+  .sticky-top-10 {
+    position: sticky;
+    top: 3.75%;
+    z-index: 1020;
+  }
+  .shadow-bottom {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  .d-small {
+    display: inline-block !important;
+  }
+  .text-wh {
+    color: black;
+    left: 40%;
+    top: 7%;
+  }
+  .mt-10 {
+    margin-top: -57%;
+  }
+}
+@media (max-width: 568px) {
+  .img-cards .col-md-2 {
+    width: 50%;
+    padding-top: 5vw;
+  }
+  .mt-10 {
+    margin-top: 30vw;
+  }
+}
+
+.menu-link:hover {
+  border-bottom: 3px solid black;
+}
+.h-5 {
+  height: 2vw;
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 10000;
+  display: none;
+}
+
+.dropdown-container {
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  max-height: 100%;
+  left: 0;
+  top: 0;
+  position: fixed;
+  transform: translateX(-100%);
+}
+.scroll {
+  max-height: 860px; /* Set max height */
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+.w-45 {
+  width: 35%;
+}
+.dropdown-right {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  transform: translateX(-100%);
+  padding: 20px;
+}

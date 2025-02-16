@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thank You for Your Order!</title>
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background-color: #f0f8ff;
+        font-family: "Arial", sans-serif;
+      }
+
+      .container {
+        max-width: 600px;
+        margin: 50px auto;
+        background-color: #ffffff;
+        border-radius: 15px;
+        padding: 30px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .header {
+        text-align: center;
+        color: #4caf50;
+      }
+
+      .header h1 {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+      }
+
+      .icon {
+        font-size: 3rem;
+        color: #4caf50;
+      }
+
+      .message {
+        font-size: 1.2rem;
+        text-align: center;
+        color: #333333;
+        margin-bottom: 20px;
+      }
+
+      .btn-back-home {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        width: 100%;
+        font-size: 1.1rem;
+        border: none;
+        transition: background-color 0.3s;
+      }
+
+      .btn-back-home:hover {
+        background-color: #0056b3;
+      }
+
+      .footer {
+        margin-top: 30px;
+        text-align: center;
+        font-size: 0.9rem;
+        color: #777777;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="header">
+        <i class="icon">&#10004;</i>
+        <h1>Thank You for Your Order!</h1>
+      </div>
+
+      <div class="message">
+        <p>
+          Your order has been successfully placed. We are processing it and will
+          notify you once it's ready for shipping.
+        </p>
+      </div>
+
+      <button class="btn-back-home" onclick="window.location.href='/';">
+        Back to Homepage
+      </button>
+
+      <div class="footer">
+        <p>Thank you for shopping with us!</p>
+      </div>
+    </div>
+  </body>
+</html>

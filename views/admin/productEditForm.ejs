@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Product</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h1>Edit Product</h1>
+      <form action="/admin/products/<%= product._id %>" method="POST" enctype="multipart/form-data">
+        <!-- Product Name -->
+        <div class="mb-3">
+          <label for="productName" class="form-label">Product Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="productName"
+            name="productName"
+            value="<%= product.name %>"
+            placeholder="Enter product name"
+            required
+          />
+        </div>
+
+        <!-- Price -->
+        <div class="mb-3">
+          <label for="price" class="form-label">Price</label>
+          <input
+            type="number"
+            step="0.01"
+            class="form-control"
+            id="price"
+            name="price"
+            value="<%= product.price %>"
+            placeholder="Enter product price"
+            required
+          />
+        </div>
+
+        <!-- Sizes Available -->
+        <div class="mb-3">
+          <label for="sizesAvailable" class="form-label">Sizes Available</label>
+          <input
+            type="text"
+            class="form-control"
+            id="sizesAvailable"
+            name="sizesAvailable"
+            value="<%= product.sizesAvailable.join(', ') %>"
+            placeholder="Enter sizes available (comma separated)"
+          />
+        </div>
+
+        <!-- Colors Available -->
+        <div class="mb-3">
+          <label for="colors" class="form-label">Colors Available</label>
+          <input
+            type="text"
+            class="form-control"
+            id="colors"
+            name="colors"
+            value="<%= product.colors.join(', ') %>"
+            placeholder="Enter colors available (comma separated)"
+          />
+        </div>
+
+        <!-- Category Type -->
+        <div class="mb-3">
+          <label for="categoryType" class="form-label">Category Type</label>
+          <select class="form-select" id="categoryType" name="categoryType" required>
+            <option value="" disabled>Select category type</option>
+            <option value="Men" <%= product.categoryType === 'Men' ? 'selected' : '' %>>Men</option>
+            <option value="Women" <%= product.categoryType === 'Women' ? 'selected' : '' %>>Women</option>
+            <option value="Kids" <%= product.categoryType === 'Kids' ? 'selected' : '' %>>Kids</option>
+            <option value="Home" <%= product.categoryType === 'Home' ? 'selected' : '' %>>Home</option>
+            <option value="Baby" <%= product.categoryType === 'Baby' ? 'selected' : '' %>>Baby</option>
+          </select>
+        </div>
+
+        <!-- Item Type -->
+        <div class="mb-3">
+          <label for="itemType" class="form-label">Item Type</label>
+          <input
+            type="text"
+            class="form-control"
+            id="itemType"
+            name="itemType"
+            value="<%= product.itemType %>"
+            placeholder="Enter item type (e.g., T-shirt, Jacket)"
+            required
+          />
+        </div>
+
+        <!-- Current Product Image -->
+        <div class="mb-3">
+          <label for="productImage" class="form-label">Current Product Image</label>
+          <div>
+            <img
+              src="<%= product.productImage %>"
+              alt="Product Image"
+              class="img-thumbnail"
+              style="max-width: 150px; max-height: 150px;"
+            />
+          </div>
+        </div>
+
+        <!-- Upload New Image -->
+        <div class="mb-3">
+          <label for="productImage" class="form-label">Upload New Image</label>
+          <input
+            type="file"
+            class="form-control"
+            id="productImage"
+            name="productImage"
+            accept="image/*"
+          />
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary">Update Product</button>
+      </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
