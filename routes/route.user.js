@@ -88,7 +88,8 @@ router.post("/verify-code", async (req, res) => {
       verificationTokenExpire: { $gt: Date.now() },
     });
 
-    console.log("hello", user?.verificationToken);
+    console.log("hello", user.verificationToken);
+    console.log("hello", user.email);
     console.log("code", code);
 
     if (!user) {
